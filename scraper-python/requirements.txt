@@ -1,0 +1,6 @@
+playwright
+pytesseract
+opencv-python
+requests
+pyyaml
+logging
