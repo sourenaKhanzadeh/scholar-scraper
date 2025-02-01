@@ -2,6 +2,11 @@ import asyncio
 import logging
 from scraper import ScholarScraper
 import sys
+import json
+
+sys.path.append(r"C:\Users\user\Desktop\scraper-python\parser-rust")
+
+import parser_rust
 
 # Fix for Playwright not working with asyncio on Windows
 if sys.platform == "win32":
@@ -33,5 +38,35 @@ async def main():
     except Exception as e:
         logging.error(f"An error occurred: {e}")
 
+
+def save_data(scraped_data):
+    json_data = json.dumps(scraped_data)
+    response = parser_rust.save_to_mongo(json_data)  # Call Rust function
+    return response
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    # asyncio.run(main())
+    # data = [
+    # {
+    #     "title": "Reinforcement Learning for Smart Contracts",
+    #     "link": "https://scholar.google.com/example",
+    #     "snippet": "This paper explores RL in smart contract optimizations...",
+    #     "citation_info": "Cited by 32"
+    #     }
+    # ]
+    # cleaned_data = parser_rust.process_articles(json.dumps(data))
+    # print(json.loads(cleaned_data))
+
+    scraped_data = [
+        {
+            "title": "Reinforcement Learning for Smart Contracts",
+            "link": "https://scholar.google.com/example",
+            "snippet": "This paper explores RL in smart contract optimizations...",
+            "citation_info": "Cited by 32"
+        }
+    ]
+
+    result = save_data(scraped_data)
+    print(result) 
+
