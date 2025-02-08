@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+lxml
+pandas
+fake-useragent
+python-dotenv
+loguru
+httpx
+fastapi
+uvicorn
